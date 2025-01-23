@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Desk Booker</title>
+</head>
+<body>
+<h1>Welcome to Desk Booker!</h1>
+
+<div>
+    <form th:action="@{/desk/add}" method="post">
+        <input type="text" name="name" placeholder="Enter Desk Name" required />
+        <button type="submit">Add Desk</button>
+    </form>
+</div>
+<div th:if="${desks != null && !desks.isEmpty()}">
+    <h2>All Desks</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="desk : ${desks}">
+            <td th:text="${desk.id}"></td>
+            <td th:text="${desk.name}"></td>
+            <td>
+                <!-- Delete Button for Each Desk -->
+                <form th:action="@{/desk/delete/{id}(id=${desk.id})}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${desks == null || desks.isEmpty()}">
+    <p>No desks available.</p>
+</div>
+
+<a href="/">Go to Home</a>
+</body>
+</html>
