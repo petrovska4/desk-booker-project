@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class OfficeService {
-    OfficeRepository officeRepository;
+    private final OfficeRepository officeRepository;
 
     @Autowired
     public OfficeService(OfficeRepository officeRepository) {
@@ -30,10 +30,15 @@ public class OfficeService {
     }
 
     public Office updateOffice(Office office) {
+        officeRepository.findById(office.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Office with ID " + office.getId() + " does not exist."));
         return officeRepository.save(office);
     }
 
     public void deleteOffice(String id) {
+        long officeId = Long.parseLong(id);
+        officeRepository.findById(officeId)
+                        .orElseThrow(() -> new IllegalArgumentException("Office with ID " + id + " not found"));
         officeRepository.deleteById(Long.valueOf(id));
     }
 }

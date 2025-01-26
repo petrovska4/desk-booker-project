@@ -14,12 +14,17 @@ import org.example.deskbooker.model.enumeration.EmployeePositionEnum;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
+    @Enumerated(EnumType.STRING)
     private EmployeePositionEnum position;
+
+    public Long getId() {
+        return id;
+    }
 }

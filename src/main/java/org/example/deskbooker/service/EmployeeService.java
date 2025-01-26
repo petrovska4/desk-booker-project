@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
-    EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
     public EmployeeService(EmployeeRepository employeeRepository) {
@@ -30,10 +30,18 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee employee) {
+        if (employee.getId() == null) {
+            throw new IllegalArgumentException("Employee must have an ID to be updated.");
+        }
+        employeeRepository.findById(employee.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Employee with ID " + employee.getId() + " not found"));
         return employeeRepository.save(employee);
     }
 
     public void deleteEmployee(String id) {
-        employeeRepository.deleteById(Long.valueOf(id));
+        long employeeId = Long.parseLong(id);
+        employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new IllegalArgumentException("Employee with ID " + id + " not found"));
+        employeeRepository.deleteById(employeeId);
     }
 }

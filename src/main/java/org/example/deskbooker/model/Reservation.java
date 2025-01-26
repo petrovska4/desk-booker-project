@@ -15,7 +15,35 @@ import java.time.LocalDate;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "desk_id")
+    private Desk desk;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public Desk getDesk() {
+        return desk;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public void setDesk(Desk desk) {
+        this.desk = desk;
+    }
 }
