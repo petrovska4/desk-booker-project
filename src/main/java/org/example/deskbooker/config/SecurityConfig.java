@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasRole("DIRECTOR")
                         .requestMatchers("/dev/**").hasAnyRole("BACKEND_DEV", "FRONTEND_DEV", "FULLSTACK_DEV", "DEV_OPS")
                         .requestMatchers("/employee/register").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
