@@ -30,6 +30,7 @@ public class SecurityConfig {
                         .requestMatchers("/dev/**").hasAnyRole("BACKEND_DEV", "FRONTEND_DEV", "FULLSTACK_DEV", "DEV_OPS")
                         .requestMatchers("/employee/register").permitAll()
                         .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/logout").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
