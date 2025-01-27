@@ -3,6 +3,7 @@ package org.example.deskbooker.service;
 import org.example.deskbooker.model.Employee;
 import org.example.deskbooker.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Employee getEmployee(String id) {
         return employeeRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new IllegalArgumentException("Desk with ID " + id + " not found"));
@@ -26,6 +30,7 @@ public class EmployeeService {
     }
 
     public Employee addEmployee(Employee employee) {
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         return employeeRepository.save(employee);
     }
 
