@@ -1,20 +1,25 @@
 package org.example.deskbooker.controller;
 
+import org.example.deskbooker.model.Employee;
 import org.example.deskbooker.model.Reservation;
+import org.example.deskbooker.service.EmployeeService;
 import org.example.deskbooker.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
     private final ReservationService reservationService;
+    private final EmployeeService employeeService;
 
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, EmployeeService employeeService) {
         this.reservationService = reservationService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/get-by-id")
@@ -28,7 +33,12 @@ public class ReservationController {
     }
 
     @PostMapping("/create")
-    public Reservation create(@RequestBody Reservation reservation) {
+    public Reservation create(@RequestBody Reservation reservation, Principal principal) {
+        String email = principal.getName();
+        Long loggedInEmployeeId = employeeService.findEmployeeIdByEmail(email);
+        Employee employee = new Employee();
+        employee.setId(loggedInEmployeeId);
+        reservation.setEmployee(employee);
         return reservationService.addReservation(reservation);
     }
 

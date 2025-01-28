@@ -31,6 +31,22 @@ public class Reservation {
         return id;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
     public Employee getEmployee() {
         return employee;
     }
@@ -45,5 +61,9 @@ public class Reservation {
 
     public void setDesk(Desk desk) {
         this.desk = desk;
+    }
+
+    public void setEmployeeId(Long loggedInEmployeeId) {
+        this.employee.setId(loggedInEmployeeId);
     }
 }

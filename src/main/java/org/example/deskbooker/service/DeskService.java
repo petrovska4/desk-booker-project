@@ -7,6 +7,7 @@ import org.example.deskbooker.repository.OfficeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,6 +28,10 @@ public class DeskService {
 
     public List<Desk> getAllDesks() {
         return deskRepository.findAll();
+    }
+
+    public List<Desk> getAllDesksByDateRange(LocalDate startDate, LocalDate endDate) {
+        return deskRepository.findAvailableDesks(startDate, endDate);
     }
 
     public Desk addDesk(Desk desk) {

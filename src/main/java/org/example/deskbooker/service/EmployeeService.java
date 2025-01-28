@@ -49,4 +49,10 @@ public class EmployeeService {
                 .orElseThrow(() -> new IllegalArgumentException("Employee with ID " + id + " not found"));
         employeeRepository.deleteById(employeeId);
     }
+
+    public Long findEmployeeIdByEmail(String email) {
+        Employee employee = employeeRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Employee with email " + email + " not found"));
+        return employee.getId();
+    }
 }
