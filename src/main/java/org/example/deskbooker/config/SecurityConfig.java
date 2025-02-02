@@ -26,6 +26,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
+                        //SOAP endpoints
+                        .requestMatchers("/ws/**").permitAll()
+                        //REST endpoints
                         .requestMatchers("/admin/**").hasRole("DIRECTOR")
                         .requestMatchers("/dev/**").hasAnyRole("BACKEND_DEV", "FRONTEND_DEV", "FULLSTACK_DEV", "DEV_OPS")
                         .requestMatchers("/employee/register").permitAll()

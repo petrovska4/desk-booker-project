@@ -26,6 +26,10 @@ public class Desk {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Office getOffice() {
         return office;
     }
@@ -36,6 +40,10 @@ public class Desk {
 
     public int getPosition() {
         return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
 }

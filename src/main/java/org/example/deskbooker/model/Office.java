@@ -29,8 +29,31 @@ public class Office {
     @JsonIgnoreProperties({"office"})
     private List<Desk> desks;
 
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public OfficeTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(OfficeTypeEnum type) {
+        this.type = type;
+    }
+
+    public List<Desk> getDesks() {
+        return desks;
     }
 }
