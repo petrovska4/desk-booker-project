@@ -1,6 +1,7 @@
 package org.example.deskbooker.service;
 
 import org.example.deskbooker.model.Employee;
+import org.example.deskbooker.model.enumeration.EmployeePositionEnum;
 import org.example.deskbooker.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -54,5 +55,11 @@ public class EmployeeService {
         Employee employee = employeeRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Employee with email " + email + " not found"));
         return employee.getId();
+    }
+
+    public List<Employee> getEmployeesByPosition(String position) {
+        EmployeePositionEnum positionEnum = EmployeePositionEnum.valueOf(position);
+
+        return employeeRepository.findAllByPosition(positionEnum);
     }
 }

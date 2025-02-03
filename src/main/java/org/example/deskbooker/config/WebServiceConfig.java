@@ -33,6 +33,11 @@ public class WebServiceConfig {
         return new SimpleXsdSchema(new ClassPathResource("schema/desk.xsd"));
     }
 
+    @Bean
+    public XsdSchema employeeSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("schema/employee.xsd"));
+    }
+
     @Bean(name = "officeServiceWsdl")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema officeSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
@@ -50,6 +55,16 @@ public class WebServiceConfig {
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("http://www.example.org/deskbooker");
         wsdl11Definition.setSchema(deskSchema);
+        return wsdl11Definition;
+    }
+
+    @Bean(name = "employeeServiceWsdl")
+    public DefaultWsdl11Definition employeeWsdlDefinition(XsdSchema employeeSchema) {
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        wsdl11Definition.setPortTypeName("EmployeeServicePort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace("http://www.example.org/deskbooker");
+        wsdl11Definition.setSchema(employeeSchema);
         return wsdl11Definition;
     }
 

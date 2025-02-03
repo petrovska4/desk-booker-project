@@ -159,6 +159,7 @@
                         <sources>
                             <source>${project.basedir}/src/main/resources/schema/office.xsd</source>
                             <source>${project.basedir}/src/main/resources/schema/desk.xsd</source>
+                            <source>${project.basedir}/src/main/resources/schema/employee.xsd</source>
                         </sources>
                         <packageName>org.example.deskbooker</packageName>
                     </configuration>
