@@ -51,4 +51,11 @@ public class ReservationController {
     public void delete(@RequestParam String id) {
         reservationService.deleteReservation(id);
     }
+
+    @GetMapping("/get-all-by-employee-id")
+    public List<Reservation> getAllByEmployeeId(Principal principal) {
+        String email = principal.getName();
+        Long loggedInEmployeeId = employeeService.findEmployeeIdByEmail(email);
+        return reservationService.getReservationsByEmployeeId(String.valueOf(loggedInEmployeeId));
+    }
 }

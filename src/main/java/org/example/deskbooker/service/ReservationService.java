@@ -50,6 +50,10 @@ public class ReservationService {
         reservationRepository.deleteById(Long.valueOf(id));
     }
 
+    public List<Reservation> getReservationsByEmployeeId(String employeeId) {
+       return reservationRepository.findAllByEmployee_Id(Long.valueOf(employeeId));
+    }
+
     private Reservation validateAndSetDeskAndEmployee(Reservation reservation) {
         if (reservation.getDesk() != null && reservation.getDesk().getId() != null) {
             Desk desk = deskRepository.findById(reservation.getDesk().getId())
