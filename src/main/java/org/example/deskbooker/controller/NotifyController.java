@@ -23,7 +23,7 @@ public class NotifyController {
             ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
             return ResponseEntity.ok("User registered & notification sent: " + response.getBody());
         } catch (Exception e) {
-            e.printStackTrace(); // optional for debug
+            e.printStackTrace();
             return ResponseEntity.status(500).body("Error contacting notification service: " + e.getMessage());
         }
     }

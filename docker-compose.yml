@@ -3,13 +3,13 @@ version: '3.8'
 services:
   app:
     build:
-      context: ./main-app
+      context: ./notification-service
+      dockerfile: Dockerfile
     container_name: springboot-app
     ports:
       - "8080:8080"
     depends_on:
       - db
-      - rabbitmq
       - notification-service
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
@@ -29,15 +29,6 @@ services:
     networks:
       - backend
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - backend
-
   notification-service:
     build:
       context: ./notification-service
@@ -46,7 +37,9 @@ services:
       - "5000:5000"
     networks:
       - backend
-    command: ["sleep", "infinity"]
 
 networks:
   backend:
+
+
+
